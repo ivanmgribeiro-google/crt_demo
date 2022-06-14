@@ -10,6 +10,22 @@ cc_binary(
     ],
 )
 
+cc_test(
+    name = "trivial_passing_test",
+    srcs = ["trivial_passing_test.cc"],
+    deps = [
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "trivial_failing_test",
+    srcs = ["trivial_failing_test.cc"],
+    deps = [
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
 target_platform(
     name = "windows",
     target = ":sieve",
@@ -21,4 +37,12 @@ runner(
     binary = ":sieve",
     platform = "@crt//platforms/x86_64:win64",
     exec_config = "@crt//platforms/x86_64:qemu_windows",
+)
+
+runner(
+    name = "windows_passing_test",
+    binary = ":trivial_passing_test",
+    platform = "@crt//platforms/x86_64:win64",
+    exec_config = "@crt//platforms/x86_64:qemu_windows",
+    testonly = True,
 )
