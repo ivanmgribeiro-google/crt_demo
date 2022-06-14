@@ -1,5 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("@crt//rules:transition.bzl", "target_platform")
+load("@crt//rules:run.bzl", "runner")
 
 cc_binary(
     name = "sieve",
@@ -13,4 +14,11 @@ target_platform(
     name = "windows",
     target = ":sieve",
     platform = "@crt//platforms/x86_64:win64",
+)
+
+runner(
+    name = "windows_demo",
+    binary = ":sieve",
+    platform = "@crt//platforms/x86_64:win64",
+    exec_config = "@crt//platforms/x86_64:qemu_windows",
 )

@@ -25,7 +25,12 @@ stacktop: .word 0x20001000
 .thumb_func
 reset:
     bl notmain
-    b hang
+
+    mov r0, #0x18           // angel_SWIreason_ReportException
+    ldr r1, =0x20026        // ADP_Stopped_ApplicationExit
+    // This instruction should be "svc 0xab" on all ARMs in Thumb mode
+    // except for ARMv6-M and ARMv7-M, where it is "bkpt 0xab".
+    bkpt 0xab
 
 .thumb_func
 hang:   b .

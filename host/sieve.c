@@ -10,6 +10,7 @@ int main() {
             printf("%d is prime\n", i);
         }
     }
-    return 0;
+    fprintf(stderr, "Just checking stderr\n");
+    return 1;
 }
 
