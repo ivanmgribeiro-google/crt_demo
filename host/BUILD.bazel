@@ -46,3 +46,11 @@ platform_runner(
     exec_config = "@crt//platforms/x86_64:qemu_windows",
     testonly = True,
 )
+
+platform_runner(
+    name = "windows_failing_test",
+    binary = ":trivial_failing_test",
+    platform = "@crt//platforms/x86_64:win64",
+    exec_config = "@crt//platforms/x86_64:qemu_windows",
+    testonly = True,
+)
