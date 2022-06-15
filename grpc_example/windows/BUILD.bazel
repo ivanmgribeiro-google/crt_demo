@@ -1,0 +1,12 @@
+load("@crt//rules:transition.bzl", "target_platform")
+load("@crt//rules:run.bzl", "runner")
+
+runner(
+    name = "greeter_client",
+    binary = "//grpc_example:greeter_client",
+    platform = "@crt//platforms/x86_64:win64",
+    exec_config = "@crt//platforms/x86_64:qemu_windows",
+    substitutions = {
+        "shutdown": "",
+    },
+)
