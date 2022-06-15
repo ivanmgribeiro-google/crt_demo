@@ -1,6 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("@crt//rules:transition.bzl", "platform_target")
-load("@crt//rules:run.bzl", "platform_runner")
+load("@crt//rules:run.bzl", "platform_runner", "platform_test")
 
 cc_binary(
     name = "sieve",
@@ -39,18 +39,22 @@ platform_runner(
     exec_config = "@crt//platforms/x86_64:qemu_windows",
 )
 
-platform_runner(
+platform_test(
     name = "windows_passing_test",
     binary = ":trivial_passing_test",
     platform = "@crt//platforms/x86_64:win64",
     exec_config = "@crt//platforms/x86_64:qemu_windows",
-    testonly = True,
+    # When running a windows test _and_ you want to see the qemu GUI window,
+    # you need to add `local=True` to disable the test sandbox.
+    local = True,
 )
 
-platform_runner(
+platform_test(
     name = "windows_failing_test",
     binary = ":trivial_failing_test",
     platform = "@crt//platforms/x86_64:win64",
     exec_config = "@crt//platforms/x86_64:qemu_windows",
-    testonly = True,
+    # When running a windows test _and_ you want to see the qemu GUI window,
+    # you need to add `local=True` to disable the test sandbox.
+    local = True,
 )
