@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("@rules_cc//cc:defs.bzl", "cc_binary")
-load("@crt//rules:transition.bzl", "target_platform")
-load("@crt//rules:run.bzl", "runner")
+load("@crt//rules:transition.bzl", "platform_target")
+load("@crt//rules:run.bzl", "platform_runner")
 
 cc_binary(
     name = "sieve",
@@ -30,13 +30,13 @@ cc_binary(
     ]
 )
 
-target_platform(
+platform_target(
     name = "arm",
     platform = "@crt//platforms/arm:cortex_m",
     target = ":sieve",
 )
 
-runner(
+platform_runner(
     name = "demo",
     binary = ":sieve",
     platform = "@crt//platforms/arm:cortex_m",

@@ -1,6 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
-load("@crt//rules:transition.bzl", "target_platform")
-load("@crt//rules:run.bzl", "runner")
+load("@crt//rules:transition.bzl", "platform_target")
+load("@crt//rules:run.bzl", "platform_runner")
 
 cc_binary(
     name = "sieve",
@@ -26,20 +26,20 @@ cc_test(
     ],
 )
 
-target_platform(
+platform_target(
     name = "windows",
     target = ":sieve",
     platform = "@crt//platforms/x86_64:win64",
 )
 
-runner(
+platform_runner(
     name = "windows_demo",
     binary = ":sieve",
     platform = "@crt//platforms/x86_64:win64",
     exec_config = "@crt//platforms/x86_64:qemu_windows",
 )
 
-runner(
+platform_runner(
     name = "windows_passing_test",
     binary = ":trivial_passing_test",
     platform = "@crt//platforms/x86_64:win64",

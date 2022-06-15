@@ -1,7 +1,6 @@
-load("@crt//rules:transition.bzl", "target_platform")
-load("@crt//rules:run.bzl", "runner")
+load("@crt//rules:run.bzl", "platform_runner")
 
-runner(
+platform_runner(
     name = "greeter_client",
     binary = "//grpc_example:greeter_client",
     platform = "@crt//platforms/x86_64:win64",
