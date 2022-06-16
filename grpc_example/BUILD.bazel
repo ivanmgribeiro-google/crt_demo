@@ -23,15 +23,10 @@ cc_grpc_library(
     deps = [":helloworld_cc_proto"],
 )
 
-
 cc_binary(
     name = "greeter_client",
     srcs = ["greeter_client.cc"],
     defines = ["BAZEL_BUILD"],
-    deps = [
-        ":helloworld_cc_grpc",
-        "@com_github_grpc_grpc//:grpc++",
-    ],
     linkopts = select({
         "//:windows": [
             "-lbcrypt",
@@ -40,6 +35,10 @@ cc_binary(
         ],
         "//conditions:default": [],
     }),
+    deps = [
+        ":helloworld_cc_grpc",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
 )
 
 cc_binary(

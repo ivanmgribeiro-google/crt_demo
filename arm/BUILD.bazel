@@ -1,4 +1,5 @@
 package(default_visibility = ["//visibility:public"])
+
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("@crt//rules:transition.bzl", "platform_target")
 load("@crt//rules:run.bzl", "platform_runner")
@@ -6,8 +7,8 @@ load("@crt//rules:run.bzl", "platform_runner")
 cc_binary(
     name = "sieve",
     srcs = [
-        "vectors.s",
         "notmain.c",
+        "vectors.s",
     ],
     copts = [
         "-nostdlib",
@@ -21,13 +22,13 @@ cc_binary(
         "-nostdlib",
         "-lgcc",
     ],
-    deps = [
-        "//lib:sieve",
-        "memmap.ld",
-    ],
     target_compatible_with = [
         "@platforms//cpu:armv6-m",
-    ]
+    ],
+    deps = [
+        "memmap.ld",
+        "//lib:sieve",
+    ],
 )
 
 platform_target(
@@ -39,6 +40,6 @@ platform_target(
 platform_runner(
     name = "demo",
     binary = ":sieve",
-    platform = "@crt//platforms/arm:cortex_m",
     exec_config = "@crt//platforms/arm:qemu",
+    platform = "@crt//platforms/arm:cortex_m",
 )

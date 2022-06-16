@@ -19,18 +19,21 @@ def google_repos():
         strip_prefix = "re2-main",
         urls = ["https://github.com/google/re2/archive/main.zip"],
     )
+
     # Googletest https://google.github.io/googletest/
     http_archive(
-      name = "com_google_googletest",
-      urls = ["https://github.com/google/googletest/archive/main.zip"],
-      strip_prefix = "googletest-main",
+        name = "com_google_googletest",
+        urls = ["https://github.com/google/googletest/archive/main.zip"],
+        strip_prefix = "googletest-main",
     )
+
     # Abseil https://abseil.io/
     http_archive(
-      name = "com_google_absl",
-      urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
-      strip_prefix = "abseil-cpp-master",
+        name = "com_google_absl",
+        urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
+        strip_prefix = "abseil-cpp-master",
     )
+
     # Protobuf toolchain
     http_archive(
         name = "com_google_protobuf",
@@ -41,6 +44,7 @@ def google_repos():
         #strip_prefix = "protobuf-main",
         strip_prefix = "protobuf-3.17.3",
     )
+
     # gRPC
     http_archive(
         name = "com_github_grpc_grpc",
