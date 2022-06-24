@@ -8,7 +8,7 @@ cc_binary(
     name = "sieve",
     srcs = [
         "notmain.c",
-        "vectors.s",
+        "start.s",
     ],
     copts = [
         "-nostdlib",
@@ -18,10 +18,10 @@ cc_binary(
         "-T $(location memmap.ld)",
         "-nostartfiles",
         "-nostdlib",
-        "-lgcc",
+        #        "-lgcc",
     ],
     target_compatible_with = [
-        "@platforms//cpu:armv6-m",
+        "@platforms//cpu:riscv32",
     ],
     deps = [
         "memmap.ld",
@@ -30,14 +30,14 @@ cc_binary(
 )
 
 platform_target(
-    name = "arm",
-    platform = "@crt//platforms/arm:cortex_m",
+    name = "riscv32",
+    platform = "@crt//platforms/riscv32:opentitan",
     target = ":sieve",
 )
 
 platform_runner(
     name = "demo",
     binary = ":sieve",
-    exec_config = "@crt//platforms/arm:qemu",
-    platform = "@crt//platforms/arm:cortex_m",
+    exec_config = "@crt//platforms/riscv32:qemu",
+    platform = "@crt//platforms/riscv32:opentitan",
 )
