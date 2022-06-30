@@ -1,0 +1,43 @@
+load("@crt//rules:pkg_win.bzl", "pkg_win")
+load("@crt//rules:run.bzl", "platform_runner")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "sample",
+    srcs = [
+        "sample.c",
+        "sample.h",
+    ],
+    linkshared = True,
+    target_compatible_with = [
+        "@platforms//os:windows",
+    ],
+)
+
+cc_binary(
+    name = "loader",
+    srcs = ["loader.c"],
+    target_compatible_with = [
+        "@platforms//os:windows",
+    ],
+)
+
+pkg_win(
+    name = "dist",
+    srcs = [
+        ":loader",
+        ":sample",
+    ],
+)
+
+platform_runner(
+    name = "demo",
+    binary = ":dist",
+    exec_config = "@crt//platforms/x86_64:qemu_windows",
+    platform = "@crt//platforms/x86_64:win64",
+    substitutions = {
+        "shutdown": "",
+        "quick_kill": "false",
+    },
+)
