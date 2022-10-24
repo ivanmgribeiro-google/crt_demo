@@ -12,6 +12,7 @@ load("@crt//config:registration.bzl", "crt_register_toolchains")
 crt_register_toolchains(
     arm = True,
     riscv32 = True,
+    cheri_llvm = True,
     win64 = True,
 )
 
